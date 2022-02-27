@@ -1,0 +1,163 @@
+import java.util.*;
+class circularqueue
+{
+    int cque[];
+    int f;
+    int r;
+    int max;
+    circularqueue(int max)
+    {
+        this.max=max;
+        cque=new int[max];
+        f=-1;
+        r=-1;
+    }
+
+    void insertion(int a)
+    {
+        if(isfull() == false)
+        {
+            if(f==-1 && r==-1)
+            {
+                f=0;
+                r=0;
+            }
+            else
+            {
+                r=(r+1)%max;
+            }
+            cque[r]=a;
+            System.out.println("Insertion of element" +a+" in the circular queue was successfull");
+        }
+        else
+        {
+            System.out.println("Insertion of element " +a+" n the circular queue was unsuccessfull due to OVERFLOW.");
+        }
+    }
+
+    int deletion()
+    {
+        int s=cque[f];
+        if(f==r)
+        {
+            r=-1;
+            f=-1;
+        }
+        if(f!=-1)
+        {
+            f=(f+1)%max;
+        }
+        return s;  
+    }
+
+    boolean isempty()
+    {
+        if(f==-1&&r==-1)
+        {
+            return true;    
+        }
+        else
+        {
+            return false;    
+        }
+    }
+
+    boolean isfull()
+    {
+        if((r+1)%max==f)
+        {
+            return true;    
+        }
+        else
+        {
+            return false;    
+        }
+    }
+
+    void display()
+    {
+        int i;
+        boolean fg=true;
+        fg=isempty();
+        if(fg==false)
+        {
+            System.out.println("The elements of the ciircular queue are-");           
+            if(f<=r)
+            {
+                for(i=f;i<=r;i++)
+                {
+                    System.out.print(cque[i]+"  ");
+                }
+            }
+            else
+            {
+                for(i=0;i<=r;i++)
+                {
+                    System.out.print(cque[i]+"  ");
+                }
+                for(i=f;i<max;i++)
+                {
+                    System.out.print(cque[i]+"  ");
+                }
+            }
+        }
+        else
+        {
+            System.out.println("The circular queue is empty "); 
+        }
+        System.out.println();      
+    }
+
+    public static void main(String args[])
+    {
+        int m,ch=1,x,a,k;
+        boolean fg=false;
+        Scanner in=new Scanner(System.in);
+        System.out.print("Enter the maximum number of elements that can be present in the circular queue:");
+        m=in.nextInt();
+        circularqueue obj=new circularqueue(m);
+        while(ch==1)
+        {
+            System.out.print("Enter 1 for insertion,2 for deletion:");           
+            x=in.nextInt();
+            switch(x)
+            {
+                case 1:
+                fg=obj.isfull();
+                if(fg==false)
+                {
+                    System.out.print("Enter the element for insertion:");
+                    a=in.nextInt(); 
+                    obj.insertion(a);
+                }
+                else
+                {
+                    System.out.println("Circular Queue is full");  
+                }
+                obj.display();
+                break;
+                case 2:
+                fg=obj.isempty();
+                if(fg==false)
+                {
+                    k=obj.deletion();
+                    System.out.println(k+" was deleted from circular queue");
+                }
+                else
+                {
+                    System.out.println("Circular queue is empty");  
+                }
+                obj.display();
+                break;                
+                default:
+                System.out.println("Error..Please enter a valid choice"); 
+
+            }
+            System.out.println("Do you wish to continue the Circular Queue Operation?"); 
+            System.out.print("Press 1 for YES and any other number fort No :");
+            ch=in.nextInt();
+            System.out.println();    System.out.println();    
+        }
+        System.out.println("You have exited the circular queue");
+    }
+}
