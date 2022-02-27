@@ -1,0 +1,103 @@
+import java.util.*;
+public class Wrd
+{
+    static void main()
+    {
+        Scanner sc=new Scanner(System.in);
+        System.out.print("Enter a number:");
+        int n=sc.nextInt();
+        String a[]={"zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine"};
+        String b[]={"Zero","Ten","Twenty","thirty","Fourty","Fifty","Sixty","Seventy","Eighty","Ninty"};
+        String c[]={"Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Ninteen"};
+        int k=0,p=n;
+        while(p!=0)
+        {
+            p=p/10;
+            k++;
+        }        
+        String m=Integer.toString(n);
+        switch(k)
+        {
+            case 1:
+            System.out.println(a[n]);
+            break;
+            case 2:
+            {
+                if(n<20)
+                {
+                    System.out.println(c[(m.charAt(1)-48)]+" ");
+                }
+                else
+                {
+                    System.out.println(b[m.charAt(0)-48]+" "+a[m.charAt(1)-48]);
+                }
+            }
+            break;
+            case 3:
+            {
+                System.out.print(a[m.charAt(0)-48]+" Hundred"+" ");
+                if(m.charAt(1)==1)
+                {
+                    System.out.print(c[m.charAt(2)-48]);
+                }
+                else
+                {
+                    if(m.charAt(1)==0 && m.charAt(2)==0)
+                    {
+                        System.out.print("");
+                    }
+                    else if(m.charAt(1)==0 && m.charAt(2)!=0)
+                    { 
+                        System.out.print(a[m.charAt(2)-48]);
+                    }
+                    else if(m.charAt(1)!=0 && m.charAt(2)==0)
+                    {
+                        System.out.print(b[m.charAt(1)]);
+                    }
+                    else
+                    {    
+                        System.out.println(b[m.charAt(1)-48]+" "+a[m.charAt(2)-48]);
+                    }
+                }
+
+            }
+            break;
+            case 4:
+            {
+                System.out.print(a[m.charAt(0)-48]+" Thousand"+" ");
+                if(m.charAt(1)!=0)
+                {
+                    System.out.print(a[m.charAt(1)-48]+" Hundred"+" ");
+                    if(m.charAt(2)==1)
+                    {
+                        System.out.print(c[m.charAt(3)-48]);
+                    }
+                    else if(m.charAt(2)==0)
+                    {
+                        System.out.print(a[m.charAt(3)-48]);
+                    }
+                    else
+                    {
+                        System.out.println(b[m.charAt(2)-48]+" "+a[m.charAt(3)-48]);
+                    }
+                }
+                else
+                {
+                    if(m.charAt(2)==1)
+                    {
+                        System.out.print(c[m.charAt(3)-48]);
+                    }
+                    else if(m.charAt(2)==0)
+                    {
+                        System.out.print(a[m.charAt(3)-48]);
+                    }
+                    else
+                    {
+                        System.out.println(b[m.charAt(2)-48]+" "+a[m.charAt(3)-48]);
+                    }
+                }
+            }
+            break;
+        }
+    }
+}                   
