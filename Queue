@@ -1,0 +1,116 @@
+import java.util.*;
+public class Queue
+{
+    static int arr[],max,front,rear;
+    Queue(int MAX)
+    {
+        max=MAX; //storing maximum size of  queue
+        front=-1;
+        rear=-1;
+        arr=new int[max];
+    }
+
+    static void insertion(int a)
+    {
+        if(rear+1==max) // no further insertion if the queue is full
+            System.out.print("Insertion not possible!");
+        else
+        {
+            arr[rear+1]=a;
+            rear++;
+        }
+    }
+
+    static int deletion()
+    {
+        int z=arr[front+1]; // deleting an element from the 1st index and incrementing front
+        ++front;
+        return z;
+    }
+
+    static boolean isEmpty() // checking if queue is empty
+    {
+        if((front==-1 && rear==-1)||(front>=rear))
+            return true;
+        else
+            return false;
+    }
+
+    static boolean isFull() // checking if queue is full
+    {
+        if(rear+1==max)
+            return true;
+        else
+            return false;
+    }
+
+    static void display()//displaying elements of queue
+    {
+        System.out.print("The elements of queue are :");   
+        if(front>-1)
+        {                    
+            for(int i=front+1;i<=rear;i++)
+                System.out.print(arr[i]+" ");
+        }
+        else
+        {
+            for(int i=0;i<=rear;i++)
+                System.out.print(arr[i]+" ");
+
+        }
+        System.out.println();
+    }
+
+    static void main()
+    {
+        Scanner sc=new Scanner(System.in);
+        System.out.print("Enter the size of queue:");
+        int size=sc.nextInt();
+        Queue ob=new Queue(size);
+        char ch1;
+        do
+        {
+            System.out.print("Enter 1 for insertion , 2 for deletion :");
+            int ch=sc.nextInt();
+            switch(ch)
+            {
+                case 1:
+                {
+                    if(isFull()==true)
+                    {
+                        System.out.println("Insertion not possible:");
+
+                    }
+                    else
+                    {
+                        System.out.print("Enter the number:");
+                        int n=sc.nextInt();
+                        ob.insertion(n);
+                    }
+                    ob.display();
+                }
+                break;
+                case 2:
+                {
+                    boolean z=isEmpty();
+                    if(z==true)//if stack is empty then further deletion is not possible
+                        System.out.print("Deletion not possible!");
+                    else
+                    {
+                        System.out.println("The deleted element="+deletion());                       
+                        ob.display();
+                    }
+                    break;
+                }
+                default:
+                System.out.print("WRONG CHOICE!!");
+
+            }
+            System.out.print("Do you wish to continue:");
+            ch1=sc.next().charAt(0);
+            System.out.println();
+            System.out.println();
+        }
+        while(ch1=='Y');//a loop to continue functions with the stack unless the user presses 'Y'
+    }
+}
