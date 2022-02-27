@@ -1,0 +1,120 @@
+import java.util.*;
+public class Stack
+{
+    static int arr[];
+    static int tos,max;
+    Stack(int MAX ) //parameterised constrcutor to initialize the instance variables
+    {
+        max=MAX; 
+        tos=-1;
+        arr=new int[max];
+    }
+
+    static void Push(int a)
+    {
+        if(tos+1<max) // continue taking unput untill the stack is empty
+        {
+            ++tos;
+            arr[tos]=a;
+        }        
+    }
+
+    static boolean Pop()//returns true if stack is empty else false
+    {
+        if(tos==-1)
+            return true; 
+        else
+        {
+            return false;
+        }
+    }
+
+    static int Peep()//returns the element at rear position and decrements rear value
+    {
+        int z=arr[tos];
+        tos--;
+        return z;
+
+    }
+
+    static boolean isEmpty()//returns true if stack is empty else false
+    {
+        if(tos==-1)
+            return true;
+        else
+            return false;
+    }
+
+    static boolean isFull()//returns true if stack is full else false
+    {
+        if(tos+1==max)
+            return true;
+        else
+            return false;
+    }
+
+    static void display()//displays the stack from 0th to (last index-1)
+    {
+        System.out.println("The elements of stack are:");
+        for(int i=tos;i>=0;i--)
+        {
+            System.out.println(arr[i]);
+        }        
+    }
+
+    static void main()
+    {
+        Scanner sc=new Scanner(System.in);
+        System.out.print("Enter the size of stack:");
+        int size=sc.nextInt();
+        Stack ob=new Stack(size);
+        char ch1;
+        do
+        {
+            System.out.print("Enter 1 for insertion , 2 for deletion :");
+            int ch=sc.nextInt();
+            switch(ch)
+            {
+                case 1:
+                {
+                    if(isFull()==true) // if the fuction returns true then further insertion is not  possible 
+                    {
+                        System.out.println("Insertion not possible:");
+
+                    }
+                    else
+                    {
+                        System.out.print("Enter the number:");// inputs the number and places it the stack
+                        int n=sc.nextInt();
+                        ob.Push(n);
+                        ob.display();
+                    }
+                }
+                break;
+                case 2:
+                {
+                    boolean z=Pop();
+                    if(z==true)
+                    {   
+                        System.out.println("Stack is Empty!");//if stack is empty then further deletion is not possible
+                    }
+                    else
+                    {
+                        System.out.println("The deleted element="+Peep());
+                        ob.display();
+                    }
+                }
+                break;
+                default :
+                System.out.println("Wrong Choice!!");
+            }
+            System.out.print("Do you wish to continue:");
+            ch1=sc.next().charAt(0);
+            System.out.println();
+            System.out.println();
+        }
+        while(ch1=='Y');//a loop to continue functions with the stack unless the user presses 'Y'
+    }
+}
+
+    
