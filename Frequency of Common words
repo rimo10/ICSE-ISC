@@ -1,0 +1,107 @@
+import java.util.*;
+class CommonWords
+{
+    public static void main(String args[])
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the paragraph: ");
+        String para = sc.nextLine();
+        String sent[] = {"",""};
+        int i=0;
+        for(int j=0;j<para.length();j++)
+        {
+            char ch = para.charAt(j);
+            if(ch=='.'||ch=='?'||ch=='!')
+            {
+                sent[i]+=ch;
+                i++;
+            }
+            else
+            {
+                sent[i]+=ch;
+            }
+        }
+
+        for(i=0;i<2;i++)
+        {
+            sent[i] = sent[i].trim().toUpperCase();
+            char ch = sent[i].charAt(sent[i].length()-1);
+            if(!(ch=='.'||ch=='?'||ch=='!'))
+            {
+                System.out.println("INVALID INPUT");
+                return;
+            }
+        }
+
+        for(i=0;i<2;i++)
+        {
+            System.out.println(sent[i]);
+            sent[i] = sent[i].substring(0,sent[i].length()-1);
+        }
+
+        StringTokenizer st = new StringTokenizer(sent[0]);
+        String words1[] = new String[st.countTokens()];
+        i=0;
+        while(st.hasMoreTokens())
+        {
+            words1[i++] = st.nextToken();
+        }
+
+        st = new StringTokenizer(sent[1]);
+        String words2[] = new String[st.countTokens()];
+        i=0;
+        while(st.hasMoreTokens())
+        {
+            words2[i++] = st.nextToken();
+        }
+
+        String commonWords[] = new String[words1.length];
+        int freq[] = new int[words1.length];
+        int commonCount = 0;
+        for(i=0;i<words1.length;i++)
+        {
+            boolean duplicate = false;
+            for(int j=0;j<commonCount;j++)
+            {
+                if(words1[i].equals(commonWords[j]))
+                {
+                    duplicate = true;
+                    break;
+                }
+            }
+            if(!duplicate)
+            {
+                int wordCount=0;
+                for(int j=0;j<words2.length;j++)
+                {
+                    if(words1[i].equals(words2[j]))
+                        wordCount++;
+                }
+                if(wordCount>0)
+                {
+                    for(int j=0;j<words1.length;j++)
+                    {
+                        if(words1[i].equals(words1[j]))
+                            wordCount++;
+                    }
+                    commonWords[commonCount] = words1[i];
+                    freq[commonCount] = wordCount;
+                    commonCount++;
+                }
+            }
+        }
+
+        if(commonCount == 0)
+        {
+            System.out.println("NO COMMON WORDS");
+        }
+        else
+        {
+            System.out.printf("%20s%20s\n","Word","Frequency");
+            for(int j=0;j<commonCount;j++)
+            {
+                System.out.printf("%20s%20d\n",commonWords[j],freq[j]);
+            }
+        }
+    }
+}
