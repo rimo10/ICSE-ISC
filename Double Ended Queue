@@ -1,0 +1,174 @@
+import java.util.*;
+class DEQ
+{
+    static int Q[];// to store the dequeue
+    static int f,r,Max;
+
+    DEQ(int Max)
+    {
+        Q = new int[Max];
+        this.Max = Max;//initialize the size of queue 
+        f=-1;
+        r=Max;
+    }
+
+    static boolean isEmpty()
+    {
+        if( f == -1 && r == Max) // checks if queue is empty 
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    static boolean isFull()
+    {
+        if( f+1 == r) //checks if queue is full
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    static void inp_front(int a)//input from front
+    {
+        if(isFull() == false)
+        {
+            Q[++f] = a;
+        }
+        else
+        {
+            System.out.println("DE Queue is Full ");
+        }
+    }
+
+    static void inp_rear(int a)//input from rear
+    {
+        if(isFull() == false)
+        {
+            Q[--r] = a;
+        }
+        else
+        {
+            System.out.println("DE Queue is Full ");
+        }
+    }
+
+    static int del_front()//delete from front
+    {
+        if(f != -1)
+        {
+            return Q[f--];
+        }
+        else
+        {
+            System.out.println("DE Queue is Empty from the front..!! ");
+            return -9999;
+        }
+    }
+
+    static int del_rear()//delete from rear
+    {
+        if(r != Max)
+        {
+            return Q[r++];
+        }
+        else
+        {
+            System.out.println("DE Queue is Empty from the rear..!! ");
+            return -9999;
+        }
+    }
+
+    static void display()
+    {
+        if( isEmpty() == true)
+        {
+            System.out.println("The DE Queue is Empty ..");
+        }
+        else
+        {
+            System.out.println("\n\nThe Elements are : ");
+            for(int i=0; i<=f;i++)
+            {
+                System.out.print(Q[i] + " , ");
+            }
+
+            for(int i=r; i<Max;i++)
+            {
+                System.out.print(Q[i] + " , ");
+            }
+        }
+        System.out.println();      
+
+    }
+
+    public static void main()
+    {
+        Scanner sc=new Scanner(System.in);        
+        System.out.print("Enter the size of queue:");
+        int size=sc.nextInt();
+        DEQ obj = new DEQ(size); char ch1;
+        do
+        {
+            System.out.print("Enter 1 for insertion from front , 2 for insertion from rear , 3 for deletion from front , 4 for deletion from rear :");
+            int ch=sc.nextInt();
+            switch(ch)
+            {
+                case 1:
+                {
+                    System.out.print("Enter the number:");
+                    int num=sc.nextInt();
+                    obj.inp_front(num);
+                    obj.display();
+                }
+                break;
+                case 2:
+                {
+                    System.out.print("Enter the number:");
+                    int num=sc.nextInt();
+                    obj.inp_rear(num);
+                    obj.display();
+                }
+                break;
+                case 3:
+                {
+                    int z=del_front();
+                    if(z==-9999)
+                        System.out.print("Deletion is not possible!");
+                    else
+                    {
+                        System.out.println("The deleted element="+z);
+                        obj.display();
+                    }
+                }
+                break;
+                case 4:
+                {
+                    int z=del_rear();
+                    if(z==-9999)
+                        System.out.print("Deletion is not possible!");
+                    else
+                    {
+                        System.out.println("The deleted element="+z);
+                        obj.display();
+                    }
+                }
+                break;
+                default:
+                System.out.println("WRONG CHOICE!!");
+            }
+            System.out.print("Do you wish to continue:");
+            ch1=sc.next().charAt(0);
+            System.out.println();
+            System.out.println();
+        }
+        while(ch1=='Y');//a loop to continue functions with the stack unless the user presses 'Y'
+    }
+}
